@@ -1,0 +1,30 @@
+.buttonBox {
+    display: flex;
+    flex: 1;
+    background-color: #f2deba;
+    padding: 2rem 4rem;
+    justify-content: space-evenly;
+}
+
+.displayButton {
+    background-color: #0e5e6f;
+    padding: 0.7rem 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    place-content: center;
+    max-width: .5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.regulatingButton {
+    background-color: #ffefd6;
+    color: #3a8891;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    place-content: center;
+    user-select: none;
+    cursor: pointer;
+    font-weight: 700;
+}
