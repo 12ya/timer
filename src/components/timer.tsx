@@ -5,39 +5,92 @@ import Input from './input';
 
 export default () => {
     const [state, setState] = useState({ ms: 0, s: 0, m: 0, h: 0 });
+    const [runningInterval, setRunningInterval] = useState(0);
+    const [percentage, setPercentage] = useState(20);
 
-    const runTimer = () => {
-        let h = state.h;
-        let m = state.m;
-        let s = state.s;
-        let ms = state.ms;
+    let h = state.h;
+    let m = state.m;
+    let s = state.s;
+    let ms = state.ms;
+    let frac = 0;
+    let sum = (state.h * 60 * 60 + state.m * 60 + state.s) * 1000;
 
-        if (h === 0 && m === 0 && s === 0 && ms === 0) {
-            console.log('timout');
+    const run = () => {
+        const currentPercentage = (frac / sum) * 50;
+        setPercentage(currentPercentage);
+
+        h = Number(Math.floor((sum / (1000 * 60 * 60)) % 24));
+        m = Number(Math.floor((sum / (1000 * 60)) % 60));
+        s = Number(Math.floor((sum / 1000) % 59));
+
+        console.log('ruuufusad', sum, currentPercentage, '-------', h, m, s);
+
+        if (sum === 0) {
+            h += 1;
+            m += 1;
         }
 
-        if (m === 0 && s === 0 && ms === 0) {
-            h--;
-            m = 60;
-        }
+        // if (h === 0 && m === 0 && s === 0 && ms === 0) {
+        //     console.log('timout');
 
-        if (s === 0 && ms === 0) {
-            m--;
-            s = 60;
-        }
+        //     clearInterval(runningInterval);
+        //     // runNegative();
+        //     return;
+        // }
 
-        if (ms === 0) {
-            s--;
-            ms = 100;
-        }
+        // if (m === 0 && s === 0 && ms === 0) {
+        //     h -= 1;
+        //     m += 60;
+        // }
 
-        ms--;
+        // if (s === 0 && ms === 0) {
+        //     m -= 1;
+        //     s += 60;
+        // }
+
+        // if (ms === 0) {
+        //     s -= 1;
+        //     ms += 100;
+        // }
+
+        // ms--;
+        sum -= 10;
+        frac += 10;
 
         setState({ h, m, s, ms });
     };
 
-    const start = () => {};
-    const stop = () => {};
+    const runNegative = () => {
+        if (m === 60) {
+            h += 1;
+            m = 0;
+        }
+
+        if (s === 60) {
+            m += 1;
+            s = 0;
+        }
+
+        if (ms === 100) {
+            s += 1;
+            ms = 0;
+        }
+        ms++;
+        setState({ ms, s, m, h });
+    };
+
+    const start = () => {
+        setRunningInterval(setInterval(run, 10));
+    };
+
+    const stop = () => {
+        clearInterval(runningInterval);
+    };
+
+    const reset = () => {
+        clearInterval(runningInterval);
+        setState({ h: 0, m: 0, ms: 0, s: 0 });
+    };
 
     return (
         <>
@@ -74,7 +127,7 @@ export default () => {
                             }}
                         >
                             <Input id={'h'} setState={setState} title='hour' />
-                            <Input id={'h'} setState={setState} title='hour' />
+                            <Input id={'m'} setState={setState} title='min' />
                         </div>
                         <div
                             style={{
@@ -85,14 +138,30 @@ export default () => {
                             <div onClick={stop} style={{ marginRight: 20 }}>
                                 <Button value={'stop'} type={'regulator'} />
                             </div>
-                            <div onClick={start}>
+                            <div onClick={start} style={{ marginRight: 20 }}>
                                 <Button value={'start'} type={'regulator'} />
+                            </div>
+                            <div onClick={reset}>
+                                <Button value={'reset'} type={'regulator'} />
                             </div>
                         </div>
                     </div>
 
-                    <div style={{ position: 'relative' }}>
-                        <div className={styles.chart} style={{ '--p': 50 }}></div>
+                    <div
+                        style={{
+                            position: 'relative',
+                            display: 'flex',
+                            flex: 1,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        <div style={{ position: 'absolute' }}>
+                            <div>hours : {state.h}</div>
+                            <div>minutes : {state.m}</div>
+                            <div>seconds : {state.s}</div>
+                        </div>
+                        <div className={styles.chart} style={{ '--p': percentage }}></div>
                     </div>
                 </div>
             </div>

@@ -39,6 +39,6 @@
     padding: 1rem;
     background: linear-gradient(#242424, #242424) content-box,
         linear-gradient(var(--v), #f2f2f2 50%, transparent 0) 0 / min(100%, (50 - var(--p)) * 100%),
-        linear-gradient(var(--v), transparent 50%, #ffefd6 0) 0 / min(100%, (var(--p) - 50) * 100%),
+        linear-gradient(var(--v), transparent 50%, #3a8891 0) 0 / min(100%, (var(--p) - 50) * 100%),
         linear-gradient(to right, #f2f2f2 50%, #3a8891 0);
 }

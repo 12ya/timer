@@ -12,7 +12,7 @@ export default () => {
     let m = state.m;
     let h = state.h;
 
-    const runStopwatch = () => {
+    const run = () => {
         if (m === 60) {
             h += 1;
             m = 0;
@@ -32,7 +32,7 @@ export default () => {
     };
 
     const start = () => {
-        setRunningInterval(setInterval(runStopwatch, 10));
+        setRunningInterval(setInterval(run, 10));
     };
 
     const stop = () => {

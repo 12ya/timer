@@ -7,9 +7,12 @@ export default ({ setState, id, title }: Input) => {
             <input
                 type='number'
                 style={{ height: '100%', width: '60%', padding: '1rem', fontSize: 20 }}
-                placeholder='hour'
-                onChange={({ target: { value: h } }) => {
-                    setState((prev: Object) => ({ ...prev, [id]: Number(h) }));
+                placeholder={title}
+                onChange={({ target: { value } }) => {
+                    setState((prev: Object) => {
+                        console.log(prev, 'daisfj');
+                        return { ...prev, [id]: Number(value) };
+                    });
                 }}
             />
         </div>
