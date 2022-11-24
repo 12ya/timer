@@ -13,7 +13,7 @@ export default () => {
     let s = state.s;
     let ms = state.ms;
     let frac = 0;
-    let sum = (state.h * 60 * 60 + state.m * 60 + state.s) * 1000;
+    let sum = (Math.abs(state.h * 60 * 60) + Math.abs(state.m * 60) + state.s) * 1000;
 
     const run = () => {
         const currentPercentage = (frac / sum) * 50;
@@ -21,7 +21,7 @@ export default () => {
 
         h = Number(Math.floor((sum / (1000 * 60 * 60)) % 24));
         m = Number(Math.floor((sum / (1000 * 60)) % 60));
-        s = Number(Math.floor((sum / 1000) % 59));
+        s = Number(Math.floor((sum / 1000) % 60));
 
         console.log('ruuufusad', sum, currentPercentage, '-------', h, m, s);
 
@@ -58,25 +58,6 @@ export default () => {
         frac += 10;
 
         setState({ h, m, s, ms });
-    };
-
-    const runNegative = () => {
-        if (m === 60) {
-            h += 1;
-            m = 0;
-        }
-
-        if (s === 60) {
-            m += 1;
-            s = 0;
-        }
-
-        if (ms === 100) {
-            s += 1;
-            ms = 0;
-        }
-        ms++;
-        setState({ ms, s, m, h });
     };
 
     const start = () => {
