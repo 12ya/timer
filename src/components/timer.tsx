@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import styles from '../App.module.css';
 import Button from './button';
 import Input from './input';
+import Pie from './pie';
 
 export default () => {
     const [state, setState] = useState({ ms: 0, s: 0, m: 0, h: 0 });
@@ -23,37 +23,11 @@ export default () => {
         m = Number(Math.floor((sum / (1000 * 60)) % 60));
         s = Number(Math.floor((sum / 1000) % 60));
 
-        console.log('ruuufusad', sum, currentPercentage, '-------', h, m, s);
-
         if (sum === 0) {
             h += 1;
             m += 1;
         }
 
-        // if (h === 0 && m === 0 && s === 0 && ms === 0) {
-        //     console.log('timout');
-
-        //     clearInterval(runningInterval);
-        //     // runNegative();
-        //     return;
-        // }
-
-        // if (m === 0 && s === 0 && ms === 0) {
-        //     h -= 1;
-        //     m += 60;
-        // }
-
-        // if (s === 0 && ms === 0) {
-        //     m -= 1;
-        //     s += 60;
-        // }
-
-        // if (ms === 0) {
-        //     s -= 1;
-        //     ms += 100;
-        // }
-
-        // ms--;
         sum -= 10;
         frac += 10;
 
@@ -128,38 +102,9 @@ export default () => {
                         </div>
                     </div>
 
-                    <div
-                        style={{
-                            position: 'relative',
-                            display: 'flex',
-                            flex: 1,
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                        }}
-                    >
-                        <div style={{ position: 'absolute' }}>
-                            <div>hours : {state.h}</div>
-                            <div>minutes : {state.m}</div>
-                            <div>seconds : {state.s}</div>
-                        </div>
-                        <div className={styles.chart} style={{ '--p': percentage }}></div>
-                    </div>
+                    <Pie h={state.h} m={state.m} s={state.s} percentage={percentage} />
                 </div>
             </div>
-            {/* <div className={styles.buttonBox} style={{ backgroundColor: 'red' }}>
-                <Button title='ms' value={state.ms} />
-                <Button title='sec' value={state.s} />
-                <Button title='min' value={state.m} />
-                <Button title='hours' value={state.h} />
-            </div>
-            <div className={styles.buttonBox}>
-                <div onClick={start}>
-                    <Button value={'start'} type={'regulator'} />
-                </div>
-                <div onClick={stop}>
-                    <Button value={'stop'} type={'regulator'} />
-                </div>
-            </div> */}
         </>
     );
 };
