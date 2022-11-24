@@ -11,7 +11,7 @@
 
 component
 
-```jsx
+```tsx
 <div
             style={{
                 position: 'relative',
