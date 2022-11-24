@@ -23,11 +23,6 @@ export default () => {
         m = Number(Math.floor((sum / (1000 * 60)) % 60));
         s = Number(Math.floor((sum / 1000) % 60));
 
-        if (sum === 0) {
-            h += 1;
-            m += 1;
-        }
-
         sum -= 10;
         frac += 10;
 
