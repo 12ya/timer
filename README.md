@@ -7,7 +7,7 @@
 
 # Pie code:
 
-![Screenshot 2022-11-24 at 10.46.22 AM.png](doc%2038d03bdda7664a39807e53df83c354b7/Screenshot_2022-11-24_at_10.46.22_AM.png)
+![Screenshot 2022-11-24 at 10.46.22 AM.png](Screenshot_2022-11-24_at_10.46.22_AM.png)
 
 component
 
