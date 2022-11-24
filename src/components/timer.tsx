@@ -96,8 +96,9 @@ export default () => {
                             </div>
                         </div>
                     </div>
-
-                    <Pie h={state.h} m={state.m} s={state.s} percentage={percentage} />
+                    <div style={{ marginBottom: 150 }}>
+                        <Pie h={state.h} m={state.m} s={state.s} percentage={percentage} />
+                    </div>
                 </div>
             </div>
         </>
