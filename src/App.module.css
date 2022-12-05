@@ -6,6 +6,34 @@
     justify-content: space-evenly;
 }
 
+@media only screen and (max-width: 600px) {
+    .buttonBox {
+        display: flex;
+        flex: 1;
+        background-color: #f2deba;
+        /* padding: 2rem 6rem; */
+        flex-wrap: wrap;
+        /* justify-content: space-between; */
+    }
+}
+
+.inputBox {
+    display: flex;
+    margin-bottom: 3rem;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .inputBox {
+        display: flex;
+        margin-bottom: 3rem;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
 .displayButton {
     background-color: #0e5e6f;
     padding: 0.7rem 2rem;
@@ -41,4 +69,38 @@
         linear-gradient(var(--v), #f2f2f2 50%, transparent 0) 0 / min(100%, (50 - var(--p)) * 100%),
         linear-gradient(var(--v), transparent 50%, #3a8891 0) 0 / min(100%, (var(--p) - 50) * 100%),
         linear-gradient(to right, #f2f2f2 50%, #3a8891 0);
+}
+
+@media only screen and (max-width: 600px) {
+    .pie {
+        --v: calc(((18 / 5) * var(--p) - 90) * 1deg);
+
+        width: 10rem;
+        height: 10rem;
+        display: inline-block;
+        border-radius: 50%;
+        padding: 2rem;
+        background: linear-gradient(#242424, #242424) content-box,
+            linear-gradient(var(--v), #f2f2f2 50%, transparent 0) 0 /
+                min(100%, (50 - var(--p)) * 100%),
+            linear-gradient(var(--v), transparent 50%, #3a8891 0) 0 /
+                min(100%, (var(--p) - 50) * 100%),
+            linear-gradient(to right, #f2f2f2 50%, #3a8891 0);
+    }
+}
+
+.inputComponent {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@media only screen and (max-width: 600px) {
+    .inputComponent {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+    }
 }

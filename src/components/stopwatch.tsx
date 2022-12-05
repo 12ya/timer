@@ -37,10 +37,12 @@ export default () => {
 
     const stop = () => {
         clearInterval(runningInterval);
+        setRunningInterval(0);
     };
 
     const reset = () => {
         clearInterval(runningInterval);
+        setRunningInterval(0);
         setState({ h: 0, m: 0, ms: 0, s: 0 });
     };
     return (
@@ -52,12 +54,16 @@ export default () => {
                 <Button title='hours' value={state.h} />
             </div>
             <div className={styles.buttonBox}>
-                <div onClick={start}>
-                    <Button value={'start'} type={'regulator'} />
-                </div>
-                <div onClick={stop}>
-                    <Button value={'stop'} type={'regulator'} />
-                </div>
+                {runningInterval ? (
+                    <div onClick={stop}>
+                        <Button value={'stop'} type={'regulator'} />
+                    </div>
+                ) : (
+                    <div onClick={start}>
+                        <Button value={'start'} type={'regulator'} />
+                    </div>
+                )}
+
                 <div onClick={reset}>
                     <Button value={'reset'} type={'regulator'} />
                 </div>

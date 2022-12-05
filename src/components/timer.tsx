@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from './button';
 import Input from './input';
 import Pie from './pie';
+import styles from '../App.module.css';
 
 export default () => {
     const [state, setState] = useState({ ms: 0, s: 0, m: 0, h: 0 });
@@ -30,15 +31,18 @@ export default () => {
     };
 
     const start = () => {
+        if (!state.h && !state.m && !state.s && !state.ms) return;
         setRunningInterval(setInterval(run, 10));
     };
 
     const stop = () => {
         clearInterval(runningInterval);
+        setRunningInterval(0);
     };
 
     const reset = () => {
         clearInterval(runningInterval);
+        setRunningInterval(0);
         setState({ h: 0, m: 0, ms: 0, s: 0 });
     };
 
@@ -68,16 +72,9 @@ export default () => {
                             alignItems: 'flex-start',
                         }}
                     >
-                        <div
-                            style={{
-                                display: 'flex',
-                                marginBottom: 40,
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}
-                        >
-                            <Input id={'h'} setState={setState} title='hour' />
-                            <Input id={'m'} setState={setState} title='min' />
+                        <div className={styles.inputBox}>
+                            <Input id={'h'} setState={setState} state={state} title='hour' />
+                            <Input id={'m'} setState={setState} state={state} title='min' />
                         </div>
                         <div
                             style={{
@@ -85,12 +82,15 @@ export default () => {
                                 flex: 1,
                             }}
                         >
-                            <div onClick={stop} style={{ marginRight: 20 }}>
-                                <Button value={'stop'} type={'regulator'} />
-                            </div>
-                            <div onClick={start} style={{ marginRight: 20 }}>
-                                <Button value={'start'} type={'regulator'} />
-                            </div>
+                            {runningInterval ? (
+                                <div onClick={stop} style={{ marginRight: 20 }}>
+                                    <Button value={'stop'} type={'regulator'} />
+                                </div>
+                            ) : (
+                                <div onClick={start} style={{ marginRight: 20 }}>
+                                    <Button value={'start'} type={'regulator'} />
+                                </div>
+                            )}
                             <div onClick={reset}>
                                 <Button value={'reset'} type={'regulator'} />
                             </div>
